@@ -10,6 +10,8 @@
 ********************************************************************************************/
 
 #include "raylib.h"
+#include "Agent.h"
+#include "Behavior.h"
 
 int main()
 {
@@ -21,6 +23,18 @@ int main()
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
 	SetTargetFPS(60);
+
+	Agent* player = new Agent();
+	player->setPosition({ 100.0f, 100.0f });
+	KeyboardBehavior* keyboardBehavior = new KeyboardBehavior();
+	player->addBehavior(keyboardBehavior);
+
+	Agent* enemy = new Agent();
+	enemy->setPosition({ 500.0f, 500.0f });
+	SeekBehavior* seekBehavior = new SeekBehavior();
+	seekBehavior->setTarget(player);
+	enemy->addBehavior(seekBehavior);
+
 	//--------------------------------------------------------------------------------------
 
 	// Main game loop
@@ -28,16 +42,18 @@ int main()
 	{
 		// Update
 		//----------------------------------------------------------------------------------
-		// TODO: Update your variables here
+		player->update(GetFrameTime());
+		enemy->update(GetFrameTime());
 		//----------------------------------------------------------------------------------
 
 		// Draw
 		//----------------------------------------------------------------------------------
 		BeginDrawing();
 
-		ClearBackground(RAYWHITE);
+		ClearBackground(BLACK);
 
-		DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+		player->draw();
+		enemy->draw();
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------
