@@ -12,6 +12,8 @@
 #include "raylib.h"
 #include "Agent.h"
 #include "Behavior.h"
+#include "KeyboardBehavior.h"
+#include "SeekBehavior.h"
 
 int main()
 {
