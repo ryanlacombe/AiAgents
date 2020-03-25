@@ -20,6 +20,13 @@ Vector2 KeyboardBehavior::update(Agent* agent, float deltaTime)
 	{
 		force.x = 500.0f;
 	}
+	/*if (IsKeyDown(KEY_SPACE))
+	{
+		if (agent->getVelocity().x > 1 || agent->getVelocity().x < -1)
+		{
+
+		}
+	}*/
 
 	return force;
 }
