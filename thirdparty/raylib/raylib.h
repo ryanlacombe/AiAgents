@@ -365,10 +365,9 @@ typedef struct Vector2 {
     {
         if (x < 1 && x > -1 && y < 1 && y > -1)
         {
-            return Vector2{ x, y };
+            return Vector2{ x / magnitude(), y / magnitude() };
         }
-
-        return Vector2{ x / magnitude(), y / magnitude() };
+        return Vector2{ x, y };
     }
 } Vector2;
 

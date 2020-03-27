@@ -2,31 +2,32 @@
 
 Vector2 KeyboardBehavior::update(Agent* agent, float deltaTime)
 {
-	Vector2 force = { 0, 0 };
+	Vector2 direction = { 0, 0 };
 
 	if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W))
 	{
-		force.y = -500.0f;
+		direction.y = -1;
 	}
 	if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
 	{
-		force.y = 500.0f;
+		direction.y = 1;
 	}
 	if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A))
 	{
-		force.x = -500.0f;
+		direction.x = -1;
 	}
 	if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
 	{
-		force.x = 500.0f;
+		direction.x = 1;
 	}
-	/*if (IsKeyDown(KEY_SPACE))
-	{
-		if (agent->getVelocity().x > 1 || agent->getVelocity().x < -1)
-		{
+	//Normalize
+	direction = direction.normalize();
 
-		}
-	}*/
+	//Multiply direction by desired speed
+	Vector2 force = direction * agent->getSpeed();
+
+	//Subtract agent's current velocity
+	force = force - agent->getVelocity();
 
 	return force;
 }
