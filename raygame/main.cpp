@@ -13,8 +13,12 @@
 #include "Agent.h"
 #include "Behavior.h"
 #include "KeyboardBehavior.h"
-#include "SeekBehavior.h"
-#include "FleeBehavior.h"
+#include "ScreenEdgeBehavior.h"
+#include "FSM.h" 
+#include "IdleState.h"
+#include "EnemyAttackState.h"
+#include "WithinRangeCondition.h"
+
 
 int main()
 {
@@ -27,16 +31,41 @@ int main()
 
 	SetTargetFPS(60);
 
+	//Create the player
 	Agent* player = new Agent();
-	player->setPosition({ 100.0f, 100.0f });
+	player->setPosition(Vector2{ 1600.0f, 900.0f });
+	player->setSpeed(500.0f);
+	player->setColor(SKYBLUE);
+	//Create and add keyboard behavior
 	KeyboardBehavior* keyboardBehavior = new KeyboardBehavior();
 	player->addBehavior(keyboardBehavior);
+	//Create and add screen edge behavior
+	ScreenEdgeBehavior* screenEdgeBehavior = new ScreenEdgeBehavior();
+	player->addBehavior(screenEdgeBehavior);
 
+	//Create the enemy
 	Agent* enemy = new Agent();
-	enemy->setPosition({ 500.0f, 500.0f });
-	FleeBehavior* seekBehavior = new FleeBehavior();
-	enemy->addBehavior(seekBehavior);
-	seekBehavior->setTarget(player);
+	enemy->setPosition(Vector2{ 800.0f, 450.0f });
+	enemy->setSpeed(250.0f);
+	enemy->setColor(MAROON);
+	//Create and add the enemy's FSM
+	FSM* enemyFSM = new FSM();
+	enemy->addBehavior(enemyFSM);
+	//Create and add the idle state
+	IdleState* idleState = new IdleState();
+	enemyFSM->addState(idleState);
+	//Create and add the attack state
+	EnemyAttackState* attackState = new EnemyAttackState(player, 250.0f);
+	enemyFSM->addState(attackState);
+	//Create and add the condition
+	Condition* withinRangeCondition = new WithinRangeCondition(player, 200.0f);
+	enemyFSM->addCondition(withinRangeCondition);
+	//Create and add the transition
+	Transition* toAttackTransition = new Transition(attackState, withinRangeCondition);
+	enemyFSM->addTransition(toAttackTransition);
+	idleState->addTransitions(toAttackTransition);
+	//Set current state to idle
+	enemyFSM->setCurrentState(idleState);
 
 	//--------------------------------------------------------------------------------------
 

@@ -9,7 +9,5 @@ public:
 
 	virtual bool test(Agent* agent) const = 0;
 
-	virtual Vector2 udate(Agent* agent, float deltaTime) {
-		return Vector2{ 0,0 };
-	}
+	virtual void update(Agent* agent, float deltaTime) {}
 };
