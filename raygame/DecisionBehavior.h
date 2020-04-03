@@ -1,15 +1,20 @@
 #pragma once
-#include "Behavior.h"
 #include "Decision.h"
 
-class DecisionBehavior : public Behavior
+/*	BehaviorDecision
+A BehaviorDecision is a Decision that stores a Behavior.
+When makeDecision is called, the stored Behavior's
+update() function is called.
+*/
+
+class BehaviorDecision : public Decision
 {
 public:
-	DecisionBehavior(Decision* decision) : m_decision(decision) {}
-	virtual ~DecisionBehavior() {}
+	BehaviorDecision(Behavior* behavior) : m_behavior(behavior) {}
+	~BehaviorDecision() {}
 
-	virtual void update(Agent* agent, float deltaTime);
+	virtual void makeDecision(Agent* agent, float deltaTime);
 
 private:
-	Decision* m_decision;
+	Behavior* m_behavior = nullptr;
 };

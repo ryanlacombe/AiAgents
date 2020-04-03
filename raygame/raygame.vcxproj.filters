@@ -57,9 +57,6 @@
     <ClCompile Include="Transition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoolranDecision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Decision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -73,6 +70,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WithinRangeCondition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DecisionTreeBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BooleanDecision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,9 +119,6 @@
     <ClInclude Include="Transition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoolranDecision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Decision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -132,6 +132,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WithinRangeCondition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionTreeBehavior.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BooleanDecision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

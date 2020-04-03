@@ -1,7 +1,7 @@
 #include "WanderBehavior.h"
 #include <cstdlib>
 
-Vector2 WanderBehavior::update(Agent* agent, float deltaTime)
+void WanderBehavior::update(Agent* agent, float deltaTime)
 {
 	auto randVec = []() {
 		float randX = (float)rand() - ((float)RAND_MAX) / 2;
@@ -16,7 +16,7 @@ Vector2 WanderBehavior::update(Agent* agent, float deltaTime)
 	targetPos = targetPos.normalize() * m_radius;
 	//Add the agent’s heading, multiplied by the distance, to the target
 	Vector2 heading = agent->getVelocity().normalize();
-	targetPos += heading * m_distance;
+	targetPos += heading * m_offset;
 	//Add the previous target
 	targetPos += m_prevTarget;
 
@@ -36,5 +36,8 @@ Vector2 WanderBehavior::update(Agent* agent, float deltaTime)
 	force = force - agent->getVelocity();
 
 	//Return the force
-	return force;
+	agent->addForce(force * deltaTime);
+
+	//Change color
+	agent->setColor(GREEN);
 }

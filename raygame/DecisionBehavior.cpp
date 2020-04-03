@@ -1,6 +1,10 @@
+#include "Behavior.h"
 #include "DecisionBehavior.h"
 
-void DecisionBehavior::update(Agent* agent, float deltaTime)
+void BehaviorDecision::makeDecision(Agent* agent, float deltaTime)
 {
+	if (m_behavior == nullptr)
+		return;
 
+	m_behavior->update(agent, deltaTime);
 }
